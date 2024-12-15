@@ -160,7 +160,9 @@ public class DefinEZ {
             System.out.println("\n=== Menu DefinEZ ===");
             System.out.println("1. Masuk Sebagai Admin");
             System.out.println("2. Cari Kata (Pengguna)");
-            System.out.println("3. Keluar");
+            System.out.println("3. Kelas Kata");
+            System.out.println("4. Turunan Kata");
+            System.out.println("5. Keluar");
             System.out.print("Pilih opsi: ");
 
             int pilihan = 0;
