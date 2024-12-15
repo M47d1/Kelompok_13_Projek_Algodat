@@ -3,14 +3,14 @@ import java.util.Scanner;
 class TreeNode {
     String kata;
     String definisi;
-    String kelasKata; // nomina, verba, adjektiva, adverbia
+    String kelasKata;
     LinkedList anak;
 
     TreeNode(String kata, String definisi, String kelasKata) {
         this.kata = kata;
         this.definisi = definisi;
         this.kelasKata = kelasKata;
-        this.anak = new LinkedList(); // Inisialisasi linked list untuk menyimpan anak-anak
+        this.anak = new LinkedList();
     }
 
     TreeNode dapatkanAnak(char c) {
@@ -61,15 +61,15 @@ class LinkedList {
         }
     }
     
-    class KamusPohon {
-        private TreeNode akar;
+    class Kamus {
+        private TreeNode root;
     
-        KamusPohon() {
-            akar = new TreeNode("", "", ""); // Node akar (kosong)
+        Kamus() {
+            root = new TreeNode("", "", ""); // Node akar (kosong)
         }
     
         public void tambahKata(String kata, String definisi, String kelasKata) {
-            TreeNode saatIni = akar;
+            TreeNode saatIni = root;
             for (char c : kata.toCharArray()) {
                 if (saatIni.dapatkanAnak(c) == null) {
                     saatIni.tambahkanAnak(new TreeNode("", "", ""), c);
@@ -82,7 +82,7 @@ class LinkedList {
         }
     
         public TreeNode cariKata(String prefix) {
-            TreeNode saatIni = akar;
+            TreeNode saatIni = root;
             for (char c : prefix.toCharArray()) {
                 if (saatIni.dapatkanAnak(c) == null) {
                     return null; // Prefix tidak ditemukan
@@ -137,13 +137,13 @@ class LinkedList {
 
     public void tampilkanAbjad() {
         System.out.println("Kata-kata dalam urutan abjad:");
-        dfs(akar, "");
+        dfs(root, "");
     }
 }
 
 public class DefinEZ {
     private static Scanner scanner = new Scanner(System.in);
-    private static KamusPohon kamus = new KamusPohon();
+    private static Kamus kamus = new Kamus();
 
     private static boolean loginAdmin() {
         System.out.print("Masukkan username admin: ");
