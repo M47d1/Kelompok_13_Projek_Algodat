@@ -154,10 +154,19 @@ public class DefinEZ {
         // Cek username dan password admin (contoh: admin, admin123)
         return username.equals("admin") && password.equals("admin123");
     }
-
+    public static final String RED = "\u001B[31m";
+    public static final String RESET = "\u001B[0m";
     public static void main(String[] args) {
         while (true) {
-            System.out.println("\n=== Menu DefinEZ ===");
+            System.out.println(RED + 
+            "  _____        __ _       ______ ______\n" +
+            " |  __ \\      / _(_)     |  ____|___  /\n" +
+            " | |  | | ___| |_ _ _ __ | |__     / / \n" +
+            " | |  | |/ _ \\  _| | '_ \\|  __|   / /  \n" +
+            " | |__| |  __/ | | | | | | |____ / /__ \n" +
+            " |_____/ \\___|_| |_|_| |_|______/_____|\n" +
+            "                                       " + RESET);
+            System.out.println(RED + "------------Welcome to DefinEZ!-----------" + RESET);
             System.out.println("1. Masuk Sebagai Admin");
             System.out.println("2. Cari Kata (Pengguna)");
             System.out.println("3. Kelas Kata");
@@ -181,7 +190,7 @@ public class DefinEZ {
                         System.out.println("1. Tambah Kata");
                         System.out.println("2. Edit Kata");
                         System.out.println("3. Hapus Kata");
-                        System.out.println("4. Tampilkan Kata Secara Abjad");
+                        System.out.println("4. Tampilkan Berdasarkan Abjad");
                         System.out.println("5. Keluar Admin");
                         System.out.print("Pilih opsi: ");
 
@@ -222,19 +231,23 @@ public class DefinEZ {
                                 keluarAdmin = true;
                                 break;
                             default:
-                                System.out.println("Pilihan tidak valid. Coba lagi.");
+                                System.out.println("Pilihan tidak valid, Coba lagi.");
                         }
                     }
                 } else {
-                    System.out.println("Login gagal. Coba lagi.");
+                    System.out.println("Login gagal, Coba lagi.");
                 }
             } else if (pilihan == 2) {
-                System.out.print("Masukkan awalan untuk mencari: ");
+                System.out.print("Cari kata: ");
                 String awalan = scanner.nextLine();
                 kamus.cariDanTampilkanKata(awalan);
             } else if (pilihan == 3) {
-                System.out.println("Keluar dari DefinEZ. Sampai jumpa!");
-                break;
+                System.out.println("Pilih kelas kata: ");
+                System.out.println("\n1. Nomina");
+                System.out.println("\n2. Verba");
+                System.out.println("\n3. Adjektiva");
+                System.out.println("\n4. Adverbia");
+                System.out.println("Pilih = ");
             } else {
                 System.out.println("Pilihan tidak valid. Coba lagi.");
             }
