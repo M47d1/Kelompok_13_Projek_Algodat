@@ -14,7 +14,6 @@ class KataTurunan {
         }
 
         System.out.println("Kata Turunan untuk '" + kataInduk + "':");
-        
         String[] akhiran = {"-an", "-kan", "me-", "pe-"};
         
         for (String akhir : akhiran) {
