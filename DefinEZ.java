@@ -144,6 +144,7 @@ class LinkedList {
 public class DefinEZ {
     private static Scanner scanner = new Scanner(System.in);
     private static Kamus kamus = new Kamus();
+    private static KataTurunan kataTurunan = new KataTurunan(kamus);
 
     private static boolean loginAdmin() {
         System.out.print("Masukkan username admin: ");
@@ -250,6 +251,10 @@ public class DefinEZ {
                 System.out.println("Pilih = ");
             } else {
                 System.out.println("Pilihan tidak valid. Coba lagi.");
+            } else if (pilihan == 4) {
+            System.out.print("Masukkan kata induk untuk mencari turunannya: ");
+            String kataInduk = scanner.nextLine();
+            kataTurunan.tampilkanTurunanKata(kataInduk);
             }
         }
     }
