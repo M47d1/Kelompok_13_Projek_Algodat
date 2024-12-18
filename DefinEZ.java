@@ -202,6 +202,20 @@ class Kamus {
             anak = anak.next;
         }
     }    
+    public void displayKataTurunan(String kataInduk){
+        TreeNode node = cariKata(kataInduk);
+        if(node != null){
+            System.out.println("[" + kataInduk + "]");
+            LinkedList.Node current = node.subNode.head;
+            System.out.println("Kata turunan: ");
+            while(current != null){
+                System.out.println(current.treeNode.kata + " => ");
+                current = current.next;
+            }
+        } else {
+            System.out.println("Kata induk tidak ditemukan.");
+        }
+    }
 }
 public class DefinEZ {
     private static Scanner scanner = new Scanner(System.in);
@@ -224,7 +238,8 @@ public class DefinEZ {
             System.out.println("1. Cari Kata");
             System.out.println("2. Tampilkan Berdasarkan Kelas Kata");
             System.out.println("3. Turunan Kata");
-            System.out.println("4. Keluar");
+            System.out.println("4. Tampilkan semua kata");
+            System.out.println("5. Keluar");
             System.out.print("Pilih opsi: ");
 
             int pilihan = 0;
@@ -284,7 +299,12 @@ public class DefinEZ {
                     // Panggil method tampilkanTurunanKata untuk menampilkan hasil
                     kataTurunan.tampilkanTurunanKata(kataInduk);
                     break;
-                case 4:
+                case 4: 
+                    System.out.println("Tampilkan Berdasarkan: ");
+                    System.out.println("1. Ascending");
+                    System.out.println("2. Descending");
+                    int pilih 
+                case 5:
                     System.out.println("Keluar dari aplikasi. Terima kasih!");
                     return;
                 default:
