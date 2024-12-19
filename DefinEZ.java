@@ -216,6 +216,52 @@ class Kamus {
             System.out.println("Kata induk tidak ditemukan.");
         }
     }
+    public void displaySemuaData(boolean ascending){
+        LinkedList<String> data = new LinkedList<>();
+        listData(root, data);
+        if(ascending){
+            sortAscending(data);
+        } else {
+            sortDescending(data);
+        }
+        for (String kata : data){
+            TreeNode node = cariKata(kata);
+            System.out.println(kata + " - " + node.definisi + " (" + node.kelasKata + ")");
+        }
+    }
+    private void listData(TreeNode node, LinkedList<String> listData){
+        if(node == null) return;
+        if(!nod.kata.isEmpty()){
+            listData.tambahNode(node.kata.charAt(0), new TreeNode(node.kata, node.definisi, node.kelasKata));
+        }
+        LinkedList.Node anak = node.subNode.head;
+        while (anak!= null){
+            listData(anak.treeNode, data);
+            anak = anak.next;
+        }
+    }
+    private void urutkanAscending(LinkedList<String> daftarKata) {
+        for (int i = 0; i < daftarKata.size() - 1; i++) {
+            for (int j = 0; j < daftarKata.size() - i - 1; j++) {
+                if (daftarKata.get(j).compareTo(daftarKata.get(j + 1)) > 0) {
+                    String temp = daftarKata.get(j);
+                    daftarKata.set(j, daftarKata.get(j + 1));
+                    daftarKata.set(j + 1, temp);
+                }
+            }
+        }
+    }
+    private void urutkanDescending(LinkedList<String> daftarKata) {
+        for (int i = 0; i < daftarKata.size() - 1; i++) {
+            for (int j = 0; j < daftarKata.size() - i - 1; j++) {
+                if (daftarKata.get(j).compareTo(daftarKata.get(j + 1)) < 0) {
+                    String temp = daftarKata.get(j);
+                    daftarKata.set(j, daftarKata.get(j + 1));
+                    daftarKata.set(j + 1, temp);
+                }
+            }
+        }
+    }
 }
 public class DefinEZ {
     private static Scanner scanner = new Scanner(System.in);
@@ -303,7 +349,12 @@ public class DefinEZ {
                     System.out.println("Tampilkan Berdasarkan: ");
                     System.out.println("1. Ascending");
                     System.out.println("2. Descending");
-                    int pilih 
+                    System.out.println("Pilih: ");
+                    int sort = scanner.nextInt();
+                    scanner.nextLine();
+                    boolean ascending = sort == 1;
+                    kamus.displaySemuaData(ascending);
+                    break;
                 case 5:
                     System.out.println("Keluar dari aplikasi. Terima kasih!");
                     return;
