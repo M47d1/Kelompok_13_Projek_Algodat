@@ -111,16 +111,7 @@ class Kamus {
         current.kelasKata = kelasKata;
     }
 
-    private void inisialisasiDataAwal() {
-
-        tambahKata("abadi", "Kekal, tidak berkesudahan", "Adjektiva");
-        tambahKata("keabadian", "Keadaan atau sifat yang abadi; tidak pernah berakhir atau tidak dapat dihancurkan", "Nomina");
-        tambahKata("Mengabdi", "Menunjukan tindakan berbakti atau melayani", "Verba");
-        tambahKata("Mengabadikan", "Menunjukan tindakan membuat susuatu menjadi abadi", "Verba");
-        tambahKata("Pengabdian", "Hasil atau proses dari mengabdi", "Nomina");
-        tambahKata("seabadi", "Perbandingan kesamaan dalam hal abadi", "Adjektiva");
-        tambahKata("Terabadikan", "sesuatu yang sudah diabadikan", "Verba");
-
+    public void inisialisasiDataAwal() {
         tambahKata("abnormal", "Tidak sesuai dengan keadaan biasa; mempunyai kelainan; tidak normal", "Adjektiva");
         tambahKata("keabnormalan", "Keadaan tidak normal", "Nomina");
 
@@ -295,7 +286,7 @@ class Kamus {
             return;
         }
         if (node.kelasKata.equalsIgnoreCase(kelasKata) && !node.kata.isEmpty()) {
-            System.out.println(node.kata + " - " + node.definisi);
+            System.out.println(node.kata + " - " + node.definisi + "(" + node.kelasKata + ")");
         }
         LinkedList.Node anak = node.subNode.head;
         while (anak != null){
@@ -303,33 +294,12 @@ class Kamus {
             anak = anak.next;
         }
     }    
-    public void displayKataTurunan(String kataInduk) {
-        TreeNode node = cariKata(kataInduk);
-        if (node != null) {
-            System.out.println("[" + kataInduk + "]");
-            System.out.print("kata turunan:\n" + kataInduk);
-            cetakTurunan(node);
-            System.out.println(); 
-        } else {
-            System.out.println("Kata induk tidak ditemukan.");
-        }
-    }
-    private void cetakTurunan(TreeNode node) {
-        LinkedList.Node current = node.subNode.head;
-        while (current != null) {
-            if (!current.treeNode.kata.isEmpty()) {
-                System.out.print(" => " + current.treeNode.kata);
-            }
-            cetakTurunan(current.treeNode); 
-            current = current.next;
-        }
-    }
     public void displayAscending() {
         Stack sortedStack = mergeSortStack(getAllNodes(root));
         while (!sortedStack.isEmpty()) {
             TreeNode node = sortedStack.pop();
             if (!node.kata.isEmpty()) {
-                System.out.println(node.kata + " - " + node.definisi);
+                System.out.println(node.kata + " - " + node.definisi + "(" + node.kelasKata + ")");
             }
         }
     }
@@ -342,7 +312,7 @@ class Kamus {
         while (!reverseStack.isEmpty()) {
             TreeNode node = reverseStack.pop();
             if (!node.kata.isEmpty()) {
-                System.out.println(node.kata + " - " + node.definisi);
+                System.out.println(node.kata + " - " + node.definisi + "(" + node.kelasKata + ")");
             }
         }
     }
@@ -419,7 +389,35 @@ class Kamus {
         }
         return mergedStack;
     }
+    public void tampilkanTurunan(String kataDasar) {
+        TreeNode current = root;
+        for (char c : kataDasar.toCharArray()) {
+            current = current.dapatkanAnak(c);
+            if (current == null) {
+                System.out.println("Kata tidak ditemukan.");
+                return;
+            }
+        }
+
+        Stack stack = new Stack();
+        stack.push(current);
+
+        System.out.println("Turunan dari kata '" + kataDasar + "':");
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+
+            if (!node.kata.equals("")) {
+                System.out.println("- " + node.kata + " (" + node.kelasKata + "): " + node.definisi);
+            }
+            LinkedList.Node child = node.subNode.head;
+            while (child != null) {
+                stack.push(child.treeNode);
+                child = child.next;
+            }
+        }
+    }
 }
+
 public class DefinEZ {
     private static Scanner scanner = new Scanner(System.in);
     private static Kamus kamus = new Kamus();
@@ -496,8 +494,8 @@ public class DefinEZ {
                     break;
                 case 3:
                     System.out.print("Masukkan kata induk untuk mencari turunannya: ");
-                    String kataInduk = scanner.nextLine();
-                    kamus.displayKataTurunan(kataInduk);
+                    String kataDasar = scanner.nextLine();
+                    kamus.tampilkanTurunan(kataDasar);
                     break;
                 case 4: 
                     System.out.println("Tampilkan Berdasarkan: ");
